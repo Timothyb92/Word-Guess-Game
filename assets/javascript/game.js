@@ -34,20 +34,33 @@ var html =
             "<p>Letters already guessed</p>" +
             "<p>" + userGuesses + "</p>";
 
+//Adds the game content to the browser
+window.onload = function () {
+    document.getElementById("game").innerHTML = html;
+}
+
+//Logs the answer to the console
+console.log("answer: " + answer);
+
+
+//Starts the game by adding each character to the answer array
+separateAnswerByLetters(answer);
+
 //Event listener for key release
 document.onkeyup = function(event){
     var keyPress = event.key;
 
     //Loops over each character in the randomly selected answer
     for (var j = 0; j < answerCharacters.length; j++){
-        if (keyPress[i] > -1){
-
+        if (answerCharacters[j] == keyPress){
+            console.log(keyPress);
         }
-        
-        //If user's key input isn't a character in the answer, guesses is decremented and the letter they guessed is pushed to the userGuesses array
-        else {
-            guesses--;
-            userGuesses.push(keyPress);
-        }
+    }
+    // If user's key input isn't a character in the answer, guesses is decremented and the letter they guessed is pushed to the userGuesses array
+    if (answer.indexOf(keyPress) == -1){
+        console.log("not a correct guess. you pressed " + keyPress);
+        console.log(guesses + " guesses remaining");
+        --guesses;
+        userGuesses.push(keyPress);
     }
 }
