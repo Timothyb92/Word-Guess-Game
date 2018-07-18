@@ -54,6 +54,7 @@ document.onkeyup = function(event){
     for (var j = 0; j < answerCharacters.length; j++){
         if (answerCharacters[j] == keyPress){
             console.log(keyPress);
+            userGuesses.push(keyPress);
         }
     }
     // If user's key input isn't a character in the answer, guesses is decremented and the letter they guessed is pushed to the userGuesses array
@@ -62,5 +63,14 @@ document.onkeyup = function(event){
         console.log(guesses + " guesses remaining");
         --guesses;
         userGuesses.push(keyPress);
+    }
+
+    //Checks to see if the key the user pressed is part of the answer. if it is, it reveals the letter to the user
+    for (var k = 0; k < userGuesses.length; k++){
+        for (var l = 0; l < userGuesses.length; l++){
+            if (answerCharacters[l] == userGuesses[k]){
+                //Some code to reveal the letter to the user
+            }
+        }
     }
 }
