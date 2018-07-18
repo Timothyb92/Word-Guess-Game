@@ -23,21 +23,35 @@ function separateAnswerByLetters(answer){
     }
 }
 
+
+//Function that puts the randomly selected answer in a series of spans (to be styled). needs to be called by a forEach method
+function putAnswerCharsToSpan (arr){
+    var htmlSpan = document.createElement('SPAN');
+    htmlSpan.setAttribute('style', 'border-bottom: 1px solid black; padding-left: 5px; visibility: hid');
+    htmlSpan.appendChild(document.createTextNode(arr));
+
+    document.getElementById("answerArray").appendChild(htmlSpan);
+}
+
+
 //Variable that stores HTML to be inserted
 var html = 
             "<p>Press any key to get started!</p>" +
             "<p> Wins: " + wins + "</p>" +
             "<p>Current word</p>" +
-            "<p>ANSWER WILL GO HERE</p>" +
+            "<p id='answerArray'></p>" +
             "<p>Number of guesses remaining</p>" +
             "<p>" + guesses + "</p>" + 
             "<p>Letters already guessed</p>" +
             "<p>" + userGuesses + "</p>";
 
-//Adds the game content to the browser
+
+//Adds the game content to the browser and runs the putAnswerCharsToSpan function
 window.onload = function () {
     document.getElementById("game").innerHTML = html;
+    putAnswerCharsToSpan(answerCharacters);
 }
+
 
 //Logs the answer to the console
 console.log("answer: " + answer);
@@ -45,6 +59,7 @@ console.log("answer: " + answer);
 
 //Starts the game by adding each character to the answer array
 separateAnswerByLetters(answer);
+
 
 //Event listener for key release
 document.onkeyup = function(event){
