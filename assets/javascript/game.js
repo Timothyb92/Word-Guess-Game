@@ -27,7 +27,7 @@ function separateAnswerByLetters(answer){
 //Function that puts the randomly selected answer in a series of spans (to be styled). needs to be called by a forEach method
 function putAnswerCharsToSpan (arr){
     var htmlSpan = document.createElement('SPAN');
-    htmlSpan.setAttribute('style', 'border-bottom: 1px solid black; padding-left: 5px; visibility: hidden; margin-left: 10px;');
+    htmlSpan.setAttribute('style', 'border-bottom: 1px solid black; padding-left: 5px; margin-left: 10px;');
     htmlSpan.appendChild(document.createTextNode(arr));
 
     document.getElementById("answerArray").appendChild(htmlSpan);
@@ -65,27 +65,33 @@ separateAnswerByLetters(answer);
 document.onkeyup = function(event){
     var keyPress = event.key.toLowerCase();
 
-    //Loops over each character in the randomly selected answer
-    for (var j = 0; j < answerCharacters.length; j++){
-        if (answerCharacters[j] == keyPress){
-            console.log(keyPress);
-            userGuesses.push(keyPress);
-        }
-    }
-    // If user's key input isn't a character in the answer, guesses is decremented and the letter they guessed is pushed to the userGuesses array
-    if (answer.indexOf(keyPress) == -1){
-        console.log("not a correct guess. you pressed " + keyPress);
-        console.log(guesses + " guesses remaining");
-        --guesses;
-        userGuesses.push(keyPress);
-    }
+    //Checks to see if input is a letter
+    if (event.keyCode >= 65 && event.keyCode <=90){
 
-    //Checks to see if the key the user pressed is part of the answer. if it is, it reveals the letter to the user
-    for (var k = 0; k < userGuesses.length; k++){
-        for (var l = 0; l < userGuesses.length; l++){
-            if (answerCharacters[l] == userGuesses[k]){
-                //Some code to reveal the letter to the user
+    //Loops over each character in the randomly selected answer
+        for (var j = 0; j < answerCharacters.length; j++){
+            if (answerCharacters[j] == keyPress){
+                console.log(keyPress);
+                userGuesses.push(keyPress);
             }
         }
+        // If user's key input isn't a character in the answer, guesses is decremented and the letter they guessed is pushed to the userGuesses array
+        if (answer.indexOf(keyPress) == -1){
+            console.log("not a correct guess. you pressed " + keyPress);
+            console.log(guesses + " guesses remaining");
+            guesses--;
+            userGuesses.push(keyPress);
+        }
+        //Checks to see if the key the user pressed is part of the answer. if it is, it reveals the letter to the user
+        for (var k = 0; k < userGuesses.length; k++){
+            for (var l = 0; l < userGuesses.length; l++){
+                if (answerCharacters[l] == userGuesses[k]){
+                    //Some code to reveal the letter to the user
+                }
+            }
+        }
+    }
+    else {
+        alert("Please choose a letter");
     }
 }
