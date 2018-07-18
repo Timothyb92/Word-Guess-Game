@@ -13,13 +13,41 @@ var guesses = 15;
 //Grabs a random word from the gameWords array and assigns it to the variable
 var answer = gameWords[Math.floor(Math.random()*gameWords.length)];
 
-//Function that gets each letter in the randomly chosen answer word
+//array that will house each character in the randomly selected answer
+var answerCharacters = [];
+
+//Function that gets each letter in the randomly chosen answer word and pushes them to answerCharacters array
 function separateAnswerByLetters(answer){
-    for (var i = 0; i < answer.length; i++)
-    document.querySelector("#answerP").append(answer[i]); //Maybe try pushing each iteration to an empty array and puttin the array in spans to style them
+    for (var i = 0; i < answer.length; i++){
+        answerCharacters.push(answer[i]);
+    }
 }
 
 //Variable that stores HTML to be inserted
 var html = 
             "<p>Press any key to get started!</p>" +
-            "<p> Wins: " + wins + "</p>";
+            "<p> Wins: " + wins + "</p>" +
+            "<p>Current word</p>" +
+            "<p>ANSWER WILL GO HERE</p>" +
+            "<p>Number of guesses remaining</p>" +
+            "<p>" + guesses + "</p>" + 
+            "<p>Letters already guessed</p>" +
+            "<p>" + userGuesses + "</p>";
+
+//Event listener for key release
+document.onkeyup = function(event){
+    var keyPress = event.key;
+
+    //Loops over each character in the randomly selected answer
+    for (var j = 0; j < answerCharacters.length; j++){
+        if (keyPress[i] > -1){
+
+        }
+        
+        //If user's key input isn't a character in the answer, guesses is decremented and the letter they guessed is pushed to the userGuesses array
+        else {
+            guesses--;
+            userGuesses.push(keyPress);
+        }
+    }
+}
