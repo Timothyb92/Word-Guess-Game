@@ -27,7 +27,7 @@ function separateAnswerByLetters(answer){
 //Function that puts the randomly selected answer in a series of spans (to be styled). needs to be called by a forEach method
 function putAnswerCharsToSpan (arr){
     var htmlSpan = document.createElement('SPAN');
-    htmlSpan.setAttribute('style', 'border-bottom: 1px solid black; padding-left: 5px; visibility: hid');
+    htmlSpan.setAttribute('style', 'border-bottom: 1px solid black; padding-left: 5px; visibility: hidden; margin-left: 10px;');
     htmlSpan.appendChild(document.createTextNode(arr));
 
     document.getElementById("answerArray").appendChild(htmlSpan);
@@ -49,7 +49,7 @@ var html =
 //Adds the game content to the browser and runs the putAnswerCharsToSpan function
 window.onload = function () {
     document.getElementById("game").innerHTML = html;
-    putAnswerCharsToSpan(answerCharacters);
+    answerCharacters.forEach(putAnswerCharsToSpan);
 }
 
 
@@ -63,7 +63,7 @@ separateAnswerByLetters(answer);
 
 //Event listener for key release
 document.onkeyup = function(event){
-    var keyPress = event.key;
+    var keyPress = event.key.toLowerCase();
 
     //Loops over each character in the randomly selected answer
     for (var j = 0; j < answerCharacters.length; j++){
