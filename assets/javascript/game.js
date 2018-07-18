@@ -8,6 +8,9 @@ var gameWords = ["hadoken", "dhalsim", "chunli", "shoryuken", "guile", "zangief"
 //Counts the number of wins the user has
 var wins = 0;
 
+//Plannign to use this to count against the winning word to confirm if the user has won
+var count = 0;
+
 //Counter for how many guesses the user has left - initialized at 15
 var guesses = 15;
 
@@ -16,6 +19,11 @@ var answer = gameWords[Math.floor(Math.random()*gameWords.length)];
 
 //array that will house each character in the randomly selected answer
 var answerCharacters = [];
+
+
+
+
+
 
 //Function that gets each letter in the randomly chosen answer word and pushes them to answerCharacters array
 function separateAnswerByLetters(){
@@ -36,6 +44,10 @@ function gameOverCheck(){
     }
 }
 
+
+
+
+
 //Function that puts the randomly selected answer in a series of spans (to be styled). 
 //needs to be called by a forEach method
 // function putAnswerCharsToSpan (arr){
@@ -54,11 +66,29 @@ function gameOverCheck(){
 // }
 
 
+function addAnswerCharsToLI(){
+    var answerUL = document.getElementById("wordUL");
+    
+    answerCharacters.forEach(function(){
+        var answerLetters = document.createElement('LI');
+        answerLetters.setAttribute('style', 'display: inline; margin-left: 10px;');
+        // var text = document.createTextNode(letter);
+        // answerLetters.appendChild(text);
+        answerUL.appendChild(answerLetters);
+        answerLetters.innerHTML = "_";
+
+
+    })
+}
+
+
+
 //Variable that stores HTML to be inserted
 var html = 
             "<p>Press any key to get started!</p>" +
             "<p> Wins: " + wins + "</p>" +
             "<p>Current word</p>" +
+            "<ul id=wordUL></ul>" +
             "<p id='answerArray'></p>" +
             "<p>Number of guesses remaining</p>" +
             "<p id=guessesP>" + guesses + "</p>" + 
@@ -93,7 +123,7 @@ document.onkeyup = function(event){
             if (answerCharacters[j] == keyPress){
                 console.log(keyPress);
                 correctGuesses.push(keyPress);
-                revealLetter();
+                // revealLetter();
                 renderGame();
             }
         }
