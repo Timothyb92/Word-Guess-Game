@@ -1,5 +1,6 @@
-//Empty array that will house user's guesses
-var lettersGuessed = [];
+//Empty arrays that will house user's guesses
+var correctGuesses = [];
+var incorrectGuesses = [];
 
 //Array that holds possible words for the game
 var gameWords = ["hadoken", "dhalsim", "chunli", "shoryuken", "guile", "zangief"];
@@ -17,7 +18,7 @@ var answer = gameWords[Math.floor(Math.random()*gameWords.length)];
 var answerCharacters = [];
 
 //Function that gets each letter in the randomly chosen answer word and pushes them to answerCharacters array
-function separateAnswerByLetters(answer){
+function separateAnswerByLetters(){
     for (var i = 0; i < answer.length; i++){
         answerCharacters.push(answer[i]);
     }
@@ -37,16 +38,20 @@ function gameOverCheck(){
 
 //Function that puts the randomly selected answer in a series of spans (to be styled). 
 //needs to be called by a forEach method
-function putAnswerCharsToSpan (arr){
-    var htmlDiv = document.createElement('DIV');
-    var htmlSpan = document.createElement('SPAN');
-    htmlDiv.setAttribute('style', 'border-bottom: solid black 1px; display: inline; margin-left: 10px;')
-    htmlSpan.setAttribute('style', 'visibility: hidden');
-    htmlSpan.appendChild(document.createTextNode(arr));
-    htmlDiv.appendChild(htmlSpan);
+// function putAnswerCharsToSpan (arr){
+//     var htmlDiv = document.createElement('DIV');
+//     var htmlSpan = document.createElement('SPAN');
+//     htmlDiv.setAttribute('style', 'border-bottom: solid black 1px; display: inline; margin-left: 10px;')
+//     htmlSpan.setAttribute('style', 'visibility: hidden');
+//     htmlSpan.appendChild(document.createTextNode(arr));
+//     htmlDiv.appendChild(htmlSpan);
+//     document.getElementById("answerArray").appendChild(htmlDiv);
+// }
 
-    document.getElementById("answerArray").appendChild(htmlDiv);
-}
+//Makes letter visable
+// function revealLetter(){
+//     document.querySelector("span").setAttribute('style', 'visibility: visable;');
+// }
 
 
 //Variable that stores HTML to be inserted
@@ -58,13 +63,13 @@ var html =
             "<p>Number of guesses remaining</p>" +
             "<p id=guessesP>" + guesses + "</p>" + 
             "<p>Letters already guessed</p>" +
-            "<p>" + lettersGuessed + "</p>";
+            "<p>" + incorrectGuesses + "</p>";
 
 
 //Adds the game content to the browser and runs the putAnswerCharsToSpan function
 window.onload = function () {
     document.getElementById("game").innerHTML = html;
-    answerCharacters.forEach(putAnswerCharsToSpan);
+    // answerCharacters.forEach(putAnswerCharsToSpan);
 }
 
 
@@ -73,7 +78,7 @@ console.log("answer: " + answer);
 
 
 //Starts the game by adding each character to the answer array
-separateAnswerByLetters(answer);
+separateAnswerByLetters();
 
 
 //Event listener for key release
@@ -87,27 +92,20 @@ document.onkeyup = function(event){
         for (var j = 0; j < answerCharacters.length; j++){
             if (answerCharacters[j] == keyPress){
                 console.log(keyPress);
-                lettersGuessed.push(keyPress);
+                correctGuesses.push(keyPress);
+                revealLetter();
                 renderGame();
             }
         }
         // If user's key input isn't a character in the answer, guesses is decremented and the 
-        //letter they guessed is pushed to the lettersGuessed array
+        //letter they guessed is pushed to the incorrectGuesses array
         if (answer.indexOf(keyPress) == -1){
+            guesses--;
             console.log("not a correct guess. you pressed " + keyPress);
             console.log(guesses + " guesses remaining");
-            guesses--;
-            lettersGuessed.push(keyPress);
+            incorrectGuesses.push(keyPress);
             renderGame();
             gameOverCheck();
-        }
-        //Checks to see if the key the user pressed is part of the answer. if it is, it reveals the letter to the user
-        for (var k = 0; k < lettersGuessed.length; k++){
-            for (var l = 0; l < lettersGuessed.length; l++){
-                if (answerCharacters[l] == lettersGuessed[k]){
-                    //Some code to reveal the letter to the user
-                }
-            }
         }
     }
 
