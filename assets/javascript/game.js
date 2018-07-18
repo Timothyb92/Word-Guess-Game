@@ -38,11 +38,14 @@ function gameOverCheck(){
 //Function that puts the randomly selected answer in a series of spans (to be styled). 
 //needs to be called by a forEach method
 function putAnswerCharsToSpan (arr){
+    var htmlDiv = document.createElement('DIV');
     var htmlSpan = document.createElement('SPAN');
-    htmlSpan.setAttribute('style', 'border-bottom: 1px solid black; padding-left: 5px; margin-left: 10px;');
+    htmlDiv.setAttribute('style', 'border-bottom: solid black 1px; display: inline; margin-left: 10px;')
+    htmlSpan.setAttribute('style', 'visibility: hidden');
     htmlSpan.appendChild(document.createTextNode(arr));
+    htmlDiv.appendChild(htmlSpan);
 
-    document.getElementById("answerArray").appendChild(htmlSpan);
+    document.getElementById("answerArray").appendChild(htmlDiv);
 }
 
 
