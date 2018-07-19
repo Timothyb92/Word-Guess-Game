@@ -41,7 +41,9 @@ function renderGame(){
 //gameover function
 function gameOverCheck(){
     if (guesses === 0){
-        document.querySelector("body").innerHTML = "GAME OVER"
+        document.querySelector("body").innerHTML =
+         "<p>GAME OVER</p>" +
+         "<p>Press spacebar to play again</p>"
     }
     else if (count === answer.length){
         wins++;
@@ -124,15 +126,13 @@ document.onkeyup = function(event){
         }
         // If user's key input isn't a character in the answer, guesses is decremented and the 
         //letter they guessed is pushed to the incorrectGuesses array
-        if (answer.indexOf(keyPress) == -1){
-            guesses--;
+        if ((answer.indexOf(keyPress) == -1) && (incorrectGuesses.indexOf(keyPress) == -1)){
             console.log("not a correct guess. you pressed " + keyPress);
             console.log(guesses + " guesses remaining");
-            if (incorrectGuesses.indexOf(keyPress) == -1){
-                incorrectGuesses.push(keyPress);
-                addIncorrectGuesses(keyPress);
-            }
-        }
+            incorrectGuesses.push(keyPress);
+            addIncorrectGuesses(keyPress);
+            guesses--;
+        }   
     }
 
     //if user input isn't a letter, this alerts them
