@@ -51,12 +51,14 @@ function gameOverCheck(){
 //Adds each letter of the winning word as a list item with the text of "_"
 function addAnswerCharsToLI(){
     var answerUL = document.getElementById("wordUL");
+    var currentIndex = 0;
     answerCharacters.forEach(function(){
         var answerLetters = document.createElement('LI');
         answerLetters.setAttribute('style', 'display: inline; margin-left: 10px;');
-        answerLetters.setAttribute('class', 'letterLI');
+        answerLetters.setAttribute('class', 'letterLI' + currentIndex);
         answerUL.appendChild(answerLetters);
         answerLetters.innerHTML = "_";
+        currentIndex++;
     })
 }
 
@@ -116,7 +118,7 @@ document.onkeyup = function(event){
             if (answerCharacters[j] == keyPress){
                 console.log(keyPress);
                 correctGuesses.push(keyPress);
-                document.querySelector(".letterLI").innerHTML = keyPress;
+                document.querySelector(".letterLI" + [j]).innerHTML = keyPress;
                 count++;
             }
         }
