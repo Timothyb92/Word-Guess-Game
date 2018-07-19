@@ -30,7 +30,7 @@ var answerCharacters = [];
 //Declaring sound files to call them later
 var gameSound = new Audio("assets/sounds/playerSelect.mp3");
 var newChallengerSound = new Audio("assets/sounds/newChallenger.mp3");
-var coinSound = new Audio("assets/sounds/insertCoin.mp3");
+var coinSound = new Audio("assets/sounds/insertCoin.mp3"); //Not using
 var youWinSound = new Audio("assets/sounds/youWin.mp3");
 
 
@@ -71,6 +71,7 @@ function gameOverCheck(){
     }
     else if (count === answer.length){
         wins++;
+        youWinSound.play();
         resetGame();
     }
 }
@@ -133,9 +134,8 @@ document.onkeyup = function(event){
 
         //Checks to see if this is the first time the user has pressed a button since the page has loaded
         //If it is, the HERE COMES A NEW CHALLENGER sound will play
-        if (wins === 0)
-        {
-            //function to play sound goes here
+        if (wins === 0){
+            newChallengerSound.play();
         }
     }
 
