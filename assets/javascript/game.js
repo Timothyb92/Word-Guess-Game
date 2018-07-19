@@ -5,8 +5,9 @@ var incorrectGuesses = [];
 //Array that holds possible words for the game
 var gameWords = ["hadoken", "dhalsim", "chunli", "shoryuken", "guile", "zangief"];
 
-//Counts the number of wins the user has
+//Counts the number of wins and losses the user has
 var wins = 0;
+var losses = 0;
 
 //Plannign to use this to count against the winning word to confirm if the user has won
 var count = 0;
@@ -47,6 +48,7 @@ function separateAnswerByLetters(){
 function renderGame(){
     document.getElementById("guessesP").innerHTML = guesses;
     document.getElementById("winsP").innerHTML = "Wins: " + wins;
+    document.getElementById("lossesP").innerHTML = "Losses: " + losses;
 }
 
 //Resets the game after a win
@@ -66,7 +68,7 @@ function resetGame(){
 //gameover function
 function gameOverCheck(){
     if (guesses === 0){
-        wins = 0;
+        losses++;
         youLoseSound.play();
         resetGame();
     }
@@ -107,6 +109,7 @@ function addIncorrectGuesses(text){
 //function that stores HTML to be inserted
 function generateHTML(){ 
     document.getElementById("winsP").innerHTML = "Wins: " + wins;
+    document.getElementById("lossesP").innerHTML = "Losses: " + losses;
     document.getElementById("guessesP").innerHTML = guesses;
 }
 
