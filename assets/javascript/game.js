@@ -16,8 +16,6 @@ var guesses = 15;
 
 //Grabs a random word from the gameWords array and assigns it to the variable
 var randomAnswerGen = function(){
-    answerCharacters = [];
-    count = 0;
     var newAnswer = gameWords[Math.floor(Math.random()*gameWords.length)];
     answer = newAnswer;
     return answer;
@@ -49,9 +47,13 @@ function renderGame(){
 
 //Resets the game after a win
 function resetGame(){
+    answerCharacters = [];
+    count = 0;
+    guesses = 15;
     randomAnswerGen();
     separateAnswerByLetters();
     addAnswerCharsToLI();
+    renderGame();
 }
 
 //gameover function
