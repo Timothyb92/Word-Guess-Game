@@ -62,9 +62,17 @@ function resetGame(){
 //gameover function
 function gameOverCheck(){
     if (guesses === 0){
-        document.querySelector("body").innerHTML =
-         "<p>GAME OVER</p>" +
-         "<p>Press spacebar to play again</p>"
+        // document.querySelector("body").innerHTML =
+        //  "<p>GAME OVER</p>" +
+        //  "<p>Press spacebar to play again</p>"
+        //  document.onkeyup = function(event){
+        //      if (event.key == " "){
+        //          wins = 0;
+        //          resetGame();
+        //      }
+        //  }
+        wins = 0;
+        resetGame();
     }
     else if (count === answer.length){
         wins++;
