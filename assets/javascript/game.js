@@ -50,9 +50,12 @@ function resetGame(){
     answerCharacters = [];
     count = 0;
     guesses = 15;
+    correctGuesses = [];
+    incorrectGuesses = [];
     randomAnswerGen();
     separateAnswerByLetters();
     addAnswerCharsToLI();
+    document.getElementById("incorrectGuesses").innerHTML = "";
     renderGame();
 }
 
@@ -65,7 +68,7 @@ function gameOverCheck(){
     }
     else if (count === answer.length){
         wins++;
-
+        resetGame();
     }
 }
 
