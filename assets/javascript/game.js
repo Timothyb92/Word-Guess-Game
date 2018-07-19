@@ -16,7 +16,11 @@ var guesses = 15;
 
 //Grabs a random word from the gameWords array and assigns it to the variable
 var randomAnswerGen = function(){
-    return gameWords[Math.floor(Math.random()*gameWords.length)];
+    answerCharacters = [];
+    count = 0;
+    var newAnswer = gameWords[Math.floor(Math.random()*gameWords.length)];
+    answer = newAnswer;
+    return answer;
 }
 
 //sets randomly generated word to the answer
@@ -44,9 +48,11 @@ function renderGame(){
 }
 
 //Resets the game after a win
-// function resetGame(){
-//     answer =
-// }
+function resetGame(){
+    randomAnswerGen();
+    separateAnswerByLetters();
+    addAnswerCharsToLI();
+}
 
 //gameover function
 function gameOverCheck(){
@@ -65,6 +71,7 @@ function gameOverCheck(){
 function addAnswerCharsToLI(){
     var answerUL = document.getElementById("wordUL");
     var currentIndex = 0;
+    answerUL.innerHTML = "";
     answerCharacters.forEach(function(){
         var answerLetters = document.createElement('LI');
         answerLetters.setAttribute('style', 'display: inline; margin-left: 10px;');
