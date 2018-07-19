@@ -15,7 +15,12 @@ var count = 0;
 var guesses = 15;
 
 //Grabs a random word from the gameWords array and assigns it to the variable
-var answer = gameWords[Math.floor(Math.random()*gameWords.length)];
+var randomAnswerGen = function(){
+    return gameWords[Math.floor(Math.random()*gameWords.length)];
+}
+
+//sets randomly generated word to the answer
+var answer = randomAnswerGen();
 
 //array that will house each character in the randomly selected answer
 var answerCharacters = [];
@@ -38,6 +43,11 @@ function renderGame(){
     document.getElementById("winsP").innerHTML = "Wins: " + wins;
 }
 
+//Resets the game after a win
+// function resetGame(){
+//     answer =
+// }
+
 //gameover function
 function gameOverCheck(){
     if (guesses === 0){
@@ -47,6 +57,7 @@ function gameOverCheck(){
     }
     else if (count === answer.length){
         wins++;
+
     }
 }
 
