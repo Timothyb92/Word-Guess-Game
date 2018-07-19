@@ -27,7 +27,11 @@ var answer = randomAnswerGen();
 //array that will house each character in the randomly selected answer
 var answerCharacters = [];
 
-
+//Declaring sound files to call them later
+var gameSound = new Audio("assets/sounds/playerSelect.mp3");
+var newChallengerSound = new Audio("assets/sounds/newChallenger.mp3");
+var coinSound = new Audio("assets/sounds/insertCoin.mp3");
+var youWinSound = new Audio("assets/sounds/youWin.mp3");
 
 
 
@@ -62,15 +66,6 @@ function resetGame(){
 //gameover function
 function gameOverCheck(){
     if (guesses === 0){
-        // document.querySelector("body").innerHTML =
-        //  "<p>GAME OVER</p>" +
-        //  "<p>Press spacebar to play again</p>"
-        //  document.onkeyup = function(event){
-        //      if (event.key == " "){
-        //          wins = 0;
-        //          resetGame();
-        //      }
-        //  }
         wins = 0;
         resetGame();
     }
@@ -128,10 +123,21 @@ console.log("answer: " + answer);
 //Starts the game by adding each character to the answer array
 separateAnswerByLetters();
 
-
 //Event listener for key release
 document.onkeyup = function(event){
     var keyPress = event.key.toLowerCase();
+
+    //Runs game sound as soon as user presses a button
+    if ((correctGuesses.length === 0) && (incorrectGuesses.length === 0)){
+        gameSound.play();
+
+        //Checks to see if this is the first time the user has pressed a button since the page has loaded
+        //If it is, the HERE COMES A NEW CHALLENGER sound will play
+        if (wins === 0)
+        {
+            //function to play sound goes here
+        }
+    }
 
     //Checks to see if input is a letter
     if (event.keyCode >= 65 && event.keyCode <=90){
