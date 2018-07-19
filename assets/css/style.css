@@ -10,8 +10,9 @@
     height: 720px;
     position: relative;
     font-family: streetFighterFont;
+    font-size: 18pt;
 }
 
 .positionAbsolute {
-    top: 50%;
+    width: 40%;
 }

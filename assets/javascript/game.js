@@ -140,9 +140,17 @@ document.onkeyup = function(event){
         for (var j = 0; j < answerCharacters.length; j++){
             if (answerCharacters[j] == keyPress){
                 console.log(keyPress);
-                correctGuesses.push(keyPress);
                 document.querySelector(".letterLI" + [j]).innerHTML = keyPress;
-                count++;
+                if (correctGuesses.indexOf(keyPress) !== -1){
+                    console.log("Character already guessed");
+                    
+                    
+                }
+                else {
+                    correctGuesses.push(keyPress);
+                    count++;
+                }
+                
             }
         }
         // If user's key input isn't a character in the answer, guesses is decremented and the 
