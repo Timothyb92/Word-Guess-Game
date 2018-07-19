@@ -1,5 +1,17 @@
-body {
+@font-face {
+    font-family: streetFighterFont;
+    src: url(sfFont.ttf)
+}
+
+#game {
     background-image: url("../images/ryustage.jpg");
     background-repeat: no-repeat;
     background-position: center;
+    height: 720px;
+    position: relative;
+    font-family: streetFighterFont;
+}
+
+.positionAbsolute {
+    top: 50%;
 }
