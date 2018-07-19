@@ -35,6 +35,7 @@ function separateAnswerByLetters(){
 //updates guesses
 function renderGame(){
     document.getElementById("guessesP").innerHTML = guesses;
+    document.getElementById("winsP").innerHTML = "Wins: " + wins;
 }
 
 //gameover function
@@ -42,51 +43,40 @@ function gameOverCheck(){
     if (guesses === 0){
         document.querySelector("body").innerHTML = "GAME OVER"
     }
+    else if (count === answer.length){
+        wins++;
+    }
 }
 
-
-
-
-
-//Function that puts the randomly selected answer in a series of spans (to be styled). 
-//needs to be called by a forEach method
-// function putAnswerCharsToSpan (arr){
-//     var htmlDiv = document.createElement('DIV');
-//     var htmlSpan = document.createElement('SPAN');
-//     htmlDiv.setAttribute('style', 'border-bottom: solid black 1px; display: inline; margin-left: 10px;')
-//     htmlSpan.setAttribute('style', 'visibility: hidden');
-//     htmlSpan.appendChild(document.createTextNode(arr));
-//     htmlDiv.appendChild(htmlSpan);
-//     document.getElementById("answerArray").appendChild(htmlDiv);
-// }
-
-//Makes letter visable
-// function revealLetter(){
-//     document.querySelector("span").setAttribute('style', 'visibility: visable;');
-// }
-
-
+//Adds each letter of the winning word as a list item with the text of "_"
 function addAnswerCharsToLI(){
     var answerUL = document.getElementById("wordUL");
-    
     answerCharacters.forEach(function(){
         var answerLetters = document.createElement('LI');
         answerLetters.setAttribute('style', 'display: inline; margin-left: 10px;');
-        // var text = document.createTextNode(letter);
-        // answerLetters.appendChild(text);
+        answerLetters.setAttribute('class', 'letterLI');
         answerUL.appendChild(answerLetters);
         answerLetters.innerHTML = "_";
+    })
+}
 
-
+//adds a list of letters the user has already guessed
+function addIncorrectGuesses(){
+    var incorrectUL = document.getElementById("incorrectGuesses");
+    incorrectGuesses.forEach(function(i){
+        var incorrectLetters = document.createElement('LI');
+        incorrectLetters.setAttribute('style', 'display: inline;');
+        incorrectLetters.setAttribute('class', 'incorrectGuessLI');
+        incorrectUL.appendChild(incorrectLetters);
     })
 }
 
 
-
-//Variable that stores HTML to be inserted
-var html = 
+//function that stores HTML to be inserted
+function generateHTML(){ 
+    document.getElementById("game").innerHTML =
             "<p>Press any key to get started!</p>" +
-            "<p> Wins: " + wins + "</p>" +
+            "<p id=winsP> Wins: " + wins + "</p>" +
             "<p>Current word</p>" +
             "<ul id=wordUL></ul>" +
             "<p id='answerArray'></p>" +
@@ -94,12 +84,15 @@ var html =
             "<p id=guessesP>" + guesses + "</p>" + 
             "<p>Letters already guessed</p>" +
             "<p>" + incorrectGuesses + "</p>";
+            "<ul id=incorrectGuesses></ul>";
+
+}
 
 
-//Adds the game content to the browser and runs the putAnswerCharsToSpan function
+//Adds the game content to the browser and runs the putAnswerCharsToLI function
 window.onload = function () {
-    document.getElementById("game").innerHTML = html;
-    // answerCharacters.forEach(putAnswerCharsToSpan);
+    generateHTML();
+    addAnswerCharsToLI();
 }
 
 
@@ -123,8 +116,16 @@ document.onkeyup = function(event){
             if (answerCharacters[j] == keyPress){
                 console.log(keyPress);
                 correctGuesses.push(keyPress);
-                // revealLetter();
+                
+                for (var h = 0; h < answerCharacters.length; h++){   
+                    if (answerCharacters[h] == keyPress){
+                        document.querySelector(".letterLI").innerHTML = keyPress;
+                    }
+                }
+
+                count++;
                 renderGame();
+                gameOverCheck();
             }
         }
         // If user's key input isn't a character in the answer, guesses is decremented and the 
