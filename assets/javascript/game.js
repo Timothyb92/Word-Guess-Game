@@ -61,14 +61,14 @@ function addAnswerCharsToLI(){
 }
 
 //adds a list of letters the user has already guessed
-function addIncorrectGuesses(){
+function addIncorrectGuesses(text){
     var incorrectUL = document.getElementById("incorrectGuesses");
-    incorrectGuesses.forEach(function(i){
-        var incorrectLetters = document.createElement('LI');
-        incorrectLetters.setAttribute('style', 'display: inline;');
-        incorrectLetters.setAttribute('class', 'incorrectGuessLI');
-        incorrectUL.appendChild(incorrectLetters);
-    })
+    var incorrectLetters = document.createElement('LI');
+    var addedLetter = document.createTextNode(text);
+    incorrectLetters.setAttribute('style', 'display: inline;');
+    incorrectLetters.setAttribute('class', 'incorrectGuessLI');
+    incorrectLetters.appendChild(addedLetter);
+    incorrectUL.appendChild(incorrectLetters);
 }
 
 
@@ -83,8 +83,8 @@ function generateHTML(){
             "<p>Number of guesses remaining</p>" +
             "<p id=guessesP>" + guesses + "</p>" + 
             "<p>Letters already guessed</p>" +
-            "<p>" + incorrectGuesses + "</p>";
-            "<ul id=incorrectGuesses></ul>";
+            "<p>" + incorrectGuesses + "</p>" +
+            "<ul id=incorrectGuesses></ul>"
 
 }
 
@@ -116,16 +116,8 @@ document.onkeyup = function(event){
             if (answerCharacters[j] == keyPress){
                 console.log(keyPress);
                 correctGuesses.push(keyPress);
-                
-                for (var h = 0; h < answerCharacters.length; h++){   
-                    if (answerCharacters[h] == keyPress){
-                        document.querySelector(".letterLI").innerHTML = keyPress;
-                    }
-                }
-
+                document.querySelector(".letterLI").innerHTML = keyPress;
                 count++;
-                renderGame();
-                gameOverCheck();
             }
         }
         // If user's key input isn't a character in the answer, guesses is decremented and the 
@@ -134,9 +126,10 @@ document.onkeyup = function(event){
             guesses--;
             console.log("not a correct guess. you pressed " + keyPress);
             console.log(guesses + " guesses remaining");
-            incorrectGuesses.push(keyPress);
-            renderGame();
-            gameOverCheck();
+            if (incorrectGuesses.indexOf(keyPress) == -1){
+                incorrectGuesses.push(keyPress);
+                addIncorrectGuesses(keyPress);
+            }
         }
     }
 
@@ -144,4 +137,6 @@ document.onkeyup = function(event){
     else {
         alert("Please choose a letter");
     }
+    gameOverCheck();
+    renderGame();
 }
