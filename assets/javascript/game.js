@@ -109,21 +109,8 @@ function addIncorrectGuesses(text){
 
 //function that stores HTML to be inserted
 function generateHTML(){ 
-    document.getElementById("game").setAttribute('class', 'bg-white');
-    document.getElementById("game").innerHTML =
-            "<div class=positionAbsolute>" +
-            "<p>Press any key to get started!</p>" +
-            "<p id=winsP> Wins: " + wins + "</p>" +
-            "<p>Current word</p>" +
-            "<ul id=wordUL></ul>" +
-            "<p id='answerArray'></p>" +
-            "<p>Number of guesses remaining</p>" +
-            "<p id=guessesP>" + guesses + "</p>" + 
-            "<p>Letters already guessed</p>" +
-            "<p>" + incorrectGuesses + "</p>" +
-            "<ul id=incorrectGuesses></ul>" +
-            "</div>"
-
+    document.getElementById("winsP").innerHTML = "Wins: " + wins;
+    document.getElementById("guessesP").innerHTML = guesses;
 }
 
 
