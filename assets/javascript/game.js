@@ -30,7 +30,7 @@ var answerCharacters = [];
 //Declaring sound files to call them later
 var gameSound = new Audio("assets/sounds/playerSelect.mp3");
 var newChallengerSound = new Audio("assets/sounds/newChallenger.mp3");
-var coinSound = new Audio("assets/sounds/insertCoin.mp3"); //Not using
+var youLoseSound = new Audio("assets/sounds/youLose.mp3");
 var youWinSound = new Audio("assets/sounds/youWin.mp3");
 
 
@@ -67,6 +67,7 @@ function resetGame(){
 function gameOverCheck(){
     if (guesses === 0){
         wins = 0;
+        youLoseSound.play();
         resetGame();
     }
     else if (count === answer.length){

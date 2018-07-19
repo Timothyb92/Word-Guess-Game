@@ -14,5 +14,14 @@
 }
 
 .positionAbsolute {
-    width: 40%;
+    width: 43%;
+}
+
+#hangmanText {
+    font-family: streetFighterFont;
+    font-size: 60pt;
+}
+
+#wordUL {
+    text-align: center;
 }
