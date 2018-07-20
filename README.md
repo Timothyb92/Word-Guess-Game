@@ -1,2 +1,2 @@
-# Word-Guess-Game
-initial commit
+# Street Fighter Themed Hangman
+This repo houses my homework for the fourth assignment at UCF's coding boot camp. The game starts out by grabbing a random index from an array of possible words. Each letter of the randomly chosen word is "hidden" from the user on the screen (in the form of underscores) until the user guesses the letter correctly. If the user guesses incorrectly, their number of remaining guesses is decreased by 1 and their incorrect guess is displayed on the screen. If the user reveals all the letters in the randomly selected word before using all their guesses, they win and the win counter is increased by 1 and a word is randomly chosen again, with its letters hidden like in the start of the game. If the user fails to guess the word with the number of guesses provided, the losses counter is increased, and the game resets.
